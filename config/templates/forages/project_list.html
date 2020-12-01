@@ -35,9 +35,11 @@
 <a class="btn btn-primary btn-lg" href="{% url 'project_new' %}">+ New Project</a>
 {% else %}
 <h1 style="color:darkcyan; text-align: center; font-size: xx-large;"> Please Sign-In before viewing. <br/> Thank you :)</h1>
+<img src="https://unsplash.com/photos/sp-p7uuT0tw?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink" style="display:block; margin-left:auto; margin-right:auto; width:50%;"/>
 <a class="btn btn-primary btn-lg" style="display:flex; justify-content: center; align-items: center;" href="{% url 'signup' %}">Sign-Up</a>
 <a class="btn btn-success btn-lg" style="display:flex; justify-content: center; align-items: center;" href="{% url 'login' %}">Login</a>
 {% endif %}
 
 
 {% endblock content %}
+
