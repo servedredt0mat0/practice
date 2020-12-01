@@ -5,7 +5,7 @@
  <div class="project-detail"> 
    <h2>Project: {{ object.title }}</h2>
     <p> by {{ object.author }} | {{ object.date }}</p>
-    <p style="border: 4px solid rgb(0, 89, 255); padding: 10px; border-radius: 25px;">{{ object.description }}</p>
+    <p style="border: 4px solid rgb(0, 89, 255); padding: 10px; border-radius: 25px; width: 45%;">{{ object.description }}</p>
  </div> 
 
  <div class="entry-container">
@@ -15,18 +15,18 @@
             <span class="font-weight-bold">
                 {{ entry.author }} &middot;
             </span>
-            <em>{{ entry }}</em> | 
+            <em>{{ entry.foraged_material }}</em> | {{entry.short_comment}}
             latitude: {{ entry.latitude}} |
-            longitude: {{ entry.longitude }} | 
+            longitude: {{ entry.longitude }} |
             <a href="{% url 'entry_delete' entry.pk %}">Delete</a> |
-            <a href="{% url 'entry_edit' entry.pk %}">Edit</a>
+            <a href="{% url 'entry_edit' entry.pk %}">Edit</a> | <a href="{% url 'entry_detail' entry.pk %}">Details</a>
         </p>
         {% endfor %}
 
     </div>
     <div class="add-entry">
-        <a class="btn btn-info btn-ml2" href="{% url 'project_edit' object.pk %}" role="button">Edit Project</a>
         <a class="btn btn-primary btn-ml2" href="{% url 'entry_new' object.pk %}" role="button">Add Entry</a>
+        <a class="btn btn-info btn-ml2" href="{% url 'project_edit' object.pk %}" role="button">Edit Project</a>
         <a class="btn btn-danger btn-ml2" href="{% url 'project_delete' object.pk %}" role="button">Delete Project</a>
     </div>
  </div>

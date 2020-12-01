@@ -2,6 +2,19 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+import datetime
+
+COUNT_TYPES = (
+    ("ton", "ton"),
+    ("lbs", "lbs"),
+    ("oz", "oz"),
+    ("g", "g"),
+    ("kg", "kg"),
+    ("tons", "tons"),
+    ("whole", "whole"),
+    ("dozen", "dozen")
+)
+
 
 class Projects(models.Model):
     title = models.CharField(max_length=255)
@@ -17,9 +30,12 @@ class Projects(models.Model):
 
 class Entry(models.Model):
     project = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='entries')
-    material = models.CharField(max_length=255)
-    latitude = models.DecimalField( max_digits=11, decimal_places=8)
-    longitude = models.DecimalField(max_digits=11, decimal_places=8,)
+    foraged_material = models.CharField(max_length=255)
+    short_comment = models.TextField(max_length=112, help_text="You may type a 112 char short description of your find or leave the current date and time.", default=datetime.datetime.now())
+    latitude = models.DecimalField( max_digits=11, decimal_places=8, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
+    count = models.DecimalField(max_digits=14, decimal_places=3, null=True, blank=True)
+    count_type = models.CharField(max_length=56, choices=COUNT_TYPES, blank=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,)
 
     def __str__(self):

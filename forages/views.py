@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Projects, Entry
+from django.shortcuts import render
 
 class HomePageView(TemplateView):
     template_name = 'index.html'
@@ -47,7 +48,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 class EntryCreateView(LoginRequiredMixin, CreateView):
     model = Entry
     template_name = 'forages/entry_new.html'
-    fields = ('material', 'latitude', 'longitude',)
+    fields = ('foraged_material', 'short_comment', 'latitude', 'longitude', 'count', 'count_type', )
 
     def form_valid(self, form):
         form.instance.project_id = self.kwargs["pk"]
@@ -56,7 +57,7 @@ class EntryCreateView(LoginRequiredMixin, CreateView):
 
 class EntryUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
     model = Entry
-    fields = ('material', 'latitude', 'longitude' )
+    fields = ('foraged_material', 'short_comment', 'latitude', 'longitude', 'count', 'count_type', )
     template_name = 'forages/entry_edit.html'
     success_url = reverse_lazy('project_list')
 
@@ -72,3 +73,21 @@ class EntryDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
+class EntryDetailView(LoginRequiredMixin, DetailView):
+    model = Entry
+    template_name = 'forages/entry_detail.html'
+
+def pie_chart(request):
+    labels = []
+    data = []
+
+    queryset = Entry.objects.all()
+    for entry in queryset:
+        labels.append(entry.foraged_material)
+        data.append(entry.count)
+
+    return render(request, 'forages/pie_chart.html', {
+        'labels': labels,
+        'data': data,
+    })

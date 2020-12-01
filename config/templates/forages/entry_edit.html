@@ -3,6 +3,10 @@
 
 {% block content %}
 <h1>Edit</h1>
+<h5> Click button to generate current location </h5>
+<button class="btn btn-primary ml-2" onclick="getLocation()">Location</button>
+</br>
+<p id="location" style="display:block; font-weight: bolder;"></p>
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -10,10 +14,7 @@
 </form>
 
 </br>
-<h5> Click button to generate current location </h5>
-<button class="btn btn-primary ml-2" onclick="getLocation()">Location</button>
-</br>
-<p id="location"></p>
+
 
 <script>
 var x = document.getElementById("location");

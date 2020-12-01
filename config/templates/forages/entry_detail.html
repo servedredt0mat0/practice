@@ -1,0 +1,16 @@
+<!-- templates/forages/entry_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+ <div class="entry-detail">
+    <h1>{{ entry.foraged_material }} <small class="text-muted"> entred by: {{ entry.author }}</small></h1>
+    <ul class="list-group list-group-flush"> 
+        <li class="list-group-item">{{ entry.short_comment }}</li>        
+        <li class="list-group-item">Latitude: {{ entry.latitude }}</li>
+        <li class="list-group-item">Longitude: {{ entry.longitude }}</li>
+        <li class="list-group-item">{{ entry.count }} {{ entry.count_type }}</li>        
+    </ul>
+</div> 
+
+ <a class="btn btn-primary ml-2" href="{% url 'project_list' %}">Back List</a>
+{% endblock content %}

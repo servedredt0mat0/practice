@@ -9,7 +9,7 @@
     <p>This will also delete all entries including:</p>
     {% for entry in object.entries.all %}
     <ul>
-        <li>"{{entry}} | {{entry.latitude}} | {{entry.longitude}}"</li>
+        <li>"{{entry.foraged_material}} | {{entry.latitude}} | {{entry.longitude}}"</li>
     </ul>
     {% endfor %}
     <button class="btn btn-danger ml-2" type="submit">Confirm</button> 
