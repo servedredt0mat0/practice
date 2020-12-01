@@ -1,0 +1,15 @@
+<!-- templates/index.html or HOME_TEMPLATE -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %} 
+<br/>
+<div class="jumbotron">
+    <h1 class="display-4">Forage Application</h1>
+    <p class="lead">A Forage tracking application built on Django. By Ryszard S. Bialach II</p>
+    <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'project_list' %}" role="button">View All Projects</a>
+    </p>
+</div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+<!-- templates/forages/project_delete.html -->
+{% extends 'base.html' %}
+
+{% block content %} 
+<h1>Delete</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object.title }}"?</p></br>
+    <p>This will also delete all entries including:</p>
+    {% for entry in object.entries.all %}
+    <ul>
+        <li>"{{entry}} | {{entry.latitude}} | {{entry.longitude}}"</li>
+    </ul>
+    {% endfor %}
+    <button class="btn btn-danger ml-2" type="submit">Confirm</button> 
+    <a class="btn btn-warning ml-2" href="{% url 'project_list' %}" role="button">No</a>
+</form>
+{% endblock content %}

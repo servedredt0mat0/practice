@@ -1,0 +1,40 @@
+<!-- templates/forages/project_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="welcome-user" style="color:darkcyan; text-align:center; font-size: x-large;">
+    <h1 style="padding: 11px;">Welcome {{ user.username }}</h1>
+</div>
+{% for project in object_list %}
+<div class="card">
+    <div clas="card-header">
+        <span class="font-weight-bold" style="font-size: x-large;"> <a href= "{% url 'project_detail' project.pk %}">{{ project.title }}</a></span> &middot;
+        <span class="text-muted">by {{ project.author }} | {{ project.date }}</span>
+    </div>
+    <div class="card-body">
+        <div class="text-muted">Project Details: </div> {{ project.description }}
+    </div>
+    <div class="card-footer">
+        {% for entry in project.entries.all %}
+        <p>
+            <span class="font-weight-bold">
+                {{ entry.author }} &middot;
+            </span>
+            <em>"{{ entry }}"</em> | 
+            longitude: {{ entry.longitude }} | 
+            laditude: {{ entry.latitude}} | 
+        </p>
+        {% endfor %}
+    </div>
+
+    <div class="card-footer text-center text-muted">
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<h1 style="color:darkcyan; text-align: center; font-size: xx-large;"> Please Sign-In before viewing. <br/> Thank you :)</h1>
+<a class="btn btn-primary btn-lg" style="display:flex; justify-content: center; align-items: center;" href="{% url 'signup' %}">Sign-Up</a>
+<a class="btn btn-success btn-lg" style="display:flex; justify-content: center; align-items: center;" href="{% url 'login' %}">Login</a>
+{% endif %}
+{% endblock content %}
