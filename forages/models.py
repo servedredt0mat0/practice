@@ -15,6 +15,12 @@ COUNT_TYPES = (
     ("dozen", "dozen")
 )
 
+FORAGED_MATERIALS =(
+    ("Mushroom", "Mushroom"),
+    ("Shell Foods", "Shell Foods"),
+    ("Crop", "Crop"),
+    ("Material", "Material"),
+)
 
 class Projects(models.Model):
     title = models.CharField(max_length=255)
@@ -30,7 +36,7 @@ class Projects(models.Model):
 
 class Entry(models.Model):
     project = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='entries')
-    foraged_material = models.CharField(max_length=255)
+    foraged_material = models.CharField(max_length=255, choices=FORAGED_MATERIALS )
     short_comment = models.TextField(max_length=112, help_text="You may type a 112 char short description of your find or leave the current date and time.", default=datetime.datetime.now())
     latitude = models.DecimalField( max_digits=11, decimal_places=8, null=True, blank=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
