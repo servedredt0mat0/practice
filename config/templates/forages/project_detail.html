@@ -5,9 +5,20 @@
  <div class="project-detail"> 
    <h2>Project: {{ object.title }}</h2>
     <p> by {{ object.author }} | {{ object.date }}</p>
-    <p style="border: 4px solid rgb(0, 89, 255); padding: 10px; border-radius: 25px; width: 45%;">{{ object.description }}</p>
+    <p style="border: 4px solid rgb(0, 89, 255); padding: 10px; border-radius: 25px; width: 66%;">{{ object.description }}</p>
  </div> 
+<hr>
+<form action="{% url 'like_project' object.pk %}" method="POST">
+    {% csrf_token %}
 
+    {% if liked %}
+    <button type="submit", name="project_id", value="{{ object.id }}", class="btn btn-danger btn-sm">Unlike</button>
+    {% else%} 
+    <button type="submit", name="project_id", value="{{ object.id }}", class="btn btn-primary btn-sm">Like</button> 
+    {% endif %}  
+    - <small><strong>{{ total_likes }} Likes </strong></small>
+</form>
+<hr>
  <div class="entry-container">
     <div class="entries">
         {% for entry in object.entries.all %}
@@ -21,7 +32,7 @@
              <a href="{% url 'entry_detail' entry.pk %}">Details</a>
         </p>
         {% endfor %}
-
+<hr>
     </div>
     <div class="add-entry">
         <a class="btn btn-primary btn-ml2" href="{% url 'entry_new' object.pk %}" role="button">Add Entry</a>

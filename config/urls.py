@@ -21,5 +21,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('forages.urls')),
+  #  path('^ratings/', include('star_ratings.urls', namespace='rating', app_name='ratings')),
+    
     
 ]

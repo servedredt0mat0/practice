@@ -3,7 +3,8 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Projects, Entry
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, reverse
+from django.http import HttpResponseRedirect
 
 class HomePageView(TemplateView):
     template_name = 'index.html'
@@ -15,6 +16,20 @@ class ProjectListView(ListView, LoginRequiredMixin):
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Projects
     template_name = 'forages/project_detail.html'
+
+    def get_context_data(self, *arg, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+
+        things = get_object_or_404(Projects, id=self.kwargs['pk'])
+        total_likes = things.total_likes()
+
+        liked = False
+        if things.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        context["total_likes"] = total_likes
+        context['liked'] = liked
+        return context
 
 class ProjectUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
     model = Projects
@@ -91,3 +106,15 @@ def pie_chart(request):
         'labels': labels,
         'data': data,
     })
+
+def LikeView(request, pk):
+    post = get_object_or_404(Projects, id=request.POST.get('project_id'))
+    liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        liked = False
+    else:
+        post.likes.add(request.user)
+        liked = True
+
+    return HttpResponseRedirect(reverse('project_detail', args=[str(pk)]))
