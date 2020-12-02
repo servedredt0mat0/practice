@@ -18,16 +18,13 @@
             <em>{{ entry.foraged_material }}</em> | {{entry.short_comment}}
             latitude: {{ entry.latitude}} |
             longitude: {{ entry.longitude }} |
-            <a href="{% url 'entry_delete' entry.pk %}">Delete</a> |
-            <a href="{% url 'entry_edit' entry.pk %}">Edit</a> | <a href="{% url 'entry_detail' entry.pk %}">Details</a>
+             <a href="{% url 'entry_detail' entry.pk %}">Details</a>
         </p>
         {% endfor %}
 
     </div>
     <div class="add-entry">
         <a class="btn btn-primary btn-ml2" href="{% url 'entry_new' object.pk %}" role="button">Add Entry</a>
-        <a class="btn btn-info btn-ml2" href="{% url 'project_edit' object.pk %}" role="button">Edit Project</a>
-        <a class="btn btn-danger btn-ml2" href="{% url 'project_delete' object.pk %}" role="button">Delete Project</a>
     </div>
  </div>
 {% endblock content %}
