@@ -45,7 +45,6 @@ INSTALLED_APPS = [
 
     # 3rd Party
     'crispy_forms',
- #   'star_ratings',
 
     # Local
     'accounts',
@@ -75,7 +74,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-#                'django.core.context_processors.request', # add for rating application feature.
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
