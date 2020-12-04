@@ -118,3 +118,7 @@ def LikeView(request, pk):
         liked = True
 
     return HttpResponseRedirect(reverse('project_detail', args=[str(pk)]))
+
+
+def GameView(request):
+    return render(request, 'games/games.html')

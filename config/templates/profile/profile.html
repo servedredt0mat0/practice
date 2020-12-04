@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <br/><br/>
+    <div class="content-section">
+        <div class="media">
+        
+            <img  class="rounded-circle account-img " width="5%" height="5%" src="{{ user.profile.profile_pic.url }}">
+
+            <div class="media-body">
+                <h2 class="account-heading">{{ object.name }}</h2>
+                <br/>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="text-secondary">Username: {{ object.username }}</h4>
+                            <h4 class="text-secondary">E-mail: {{object.email }}</h4>
+                            <h4 class="text-secondary">Name: {{ object.name }}</h4>
+                            <h4 class="text-secondary">Age: {{ object.age }}</h4>
+                            <h4 class="text-secondary">City: {{ object.city }}</h4>
+                            <h4 class="text-secondary">Country: {{ object.country }}</h4>
+                        </div>
+                        <div class="col">
+                            <img src="{{ user.profile.profile_pic.url }}" width="240" height="250">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

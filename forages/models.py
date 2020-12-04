@@ -46,7 +46,7 @@ class Entry(models.Model):
     latitude = models.DecimalField( max_digits=11, decimal_places=8, null=True, blank=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
     count = models.DecimalField(max_digits=14, decimal_places=3, null=True, blank=True)
-    count_type = models.CharField(max_length=56, choices=COUNT_TYPES, blank=True)
+    unit = models.CharField(max_length=56, choices=COUNT_TYPES, blank=True)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,)
 
     def __str__(self):

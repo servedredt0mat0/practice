@@ -11,10 +11,6 @@ class ProjectAdmin(admin.ModelAdmin):
         EntryInline,
     ]
 
-class EntryAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {'widget': Textarea(attrs={'rows':5, 'cols':23})},
-    }
 
 admin.site.register(Projects, ProjectAdmin)
-admin.site.register(Entry, EntryAdmin)
+admin.site.register(Entry)
