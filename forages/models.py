@@ -21,6 +21,7 @@ FORAGED_MATERIALS =(
     ("Shell Foods", "Shell Foods"),
     ("Crop", "Crop"),
     ("Material", "Material"),
+    ("In Response", "In Response"),
 )
 
 class Projects(models.Model):
