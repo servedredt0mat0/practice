@@ -63,7 +63,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 class EntryCreateView(LoginRequiredMixin, CreateView):
     model = Entry
     template_name = 'forages/entry_new.html'
-    fields = ('foraged_material', 'short_comment', 'latitude', 'longitude', 'count', 'count_type', )
+    fields = ('foraged_material', 'short_comment', 'latitude', 'longitude', 'count', 'unit', )
 
     def form_valid(self, form):
         form.instance.project_id = self.kwargs["pk"]
@@ -72,7 +72,7 @@ class EntryCreateView(LoginRequiredMixin, CreateView):
 
 class EntryUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
     model = Entry
-    fields = ('foraged_material', 'short_comment', 'latitude', 'longitude', 'count', 'count_type', )
+    fields = ('foraged_material', 'short_comment', 'latitude', 'longitude', 'count', 'unit', )
     template_name = 'forages/entry_edit.html'
     success_url = reverse_lazy('project_list')
 
