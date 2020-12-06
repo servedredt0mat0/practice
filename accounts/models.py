@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
+from django.contrib.auth import get_user_model
+
 
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=255, null=True)
@@ -9,10 +12,14 @@ class CustomUser(AbstractUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField()
     profile_pic = models.ImageField(default='default.jpg', upload_to="profile_pics/")
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.user
     
+    def get_absolute_url(self):
+        use = get_user_model()
+        user = use.pk
+        return reverse('profile', kwargs = {'pk': self.user })

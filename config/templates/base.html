@@ -35,7 +35,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'profile' user.pk %}">Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'profile_edit' %}">Edit Profile</a>
+                                <a class="dropdown-item" href="{% url 'profile_edit' user.pk %}">Edit Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'game_home' %}">Games</a>
                                 
