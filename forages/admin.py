@@ -8,7 +8,7 @@ class EntryInline(admin.TabularInline):
 
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [
-        TabularInline,
+        EntryInline,
     ]
 
 

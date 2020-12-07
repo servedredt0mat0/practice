@@ -64,7 +64,6 @@ class EntryCreateView(LoginRequiredMixin, CreateView):
     model = Entry
     template_name = 'forages/entry_new.html'
     fields = ('foraged_material', 'short_comment', 'latitude', 'longitude', 'count', 'unit', )
-    #success_url = reverse_lazy('project_detail')
 
     def get_success_url(self):
         return reverse_lazy('project_detail', kwargs = {'pk':self.kwargs['pk']})
