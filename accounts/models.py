@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField()
-    profile_pic = models.ImageField(default='default.jpg', upload_to="profile_pics/")
+    profile_pic = models.ImageField(default='media/default.jpg', upload_to="media/profile_pics/")
 
     def __str__(self):
         return self.user
