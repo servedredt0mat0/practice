@@ -27,6 +27,7 @@ Pillow = "==8.0.1"
 boto3 = "*"
 django-storages = "*"
 django-secure = "*"
+django-sslserver = "*"
 
 [requires]
 python_version = "3.8"
