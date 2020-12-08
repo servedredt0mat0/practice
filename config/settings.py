@@ -26,6 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str("SECRET_KEY")
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
@@ -47,6 +51,7 @@ INSTALLED_APPS = [
     # 3rd Party
     'crispy_forms',
     'storages',
+    'djangosecure',
 
     # Local
     'accounts',
@@ -55,6 +60,10 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'accounts.CustomUser' # manage custom user creations
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+MIDDLEWARE_CLASSES = (
+        'djangosecure.middleware.SecurityMiddleware',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
